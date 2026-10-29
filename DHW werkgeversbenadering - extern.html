@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samen werken aan talent | Den Haag Werkt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --magenta:#D81B78;--paars:#6E3A84;--donker:#2D1A44;--lila:#F4EEF6;--roze:#FCE4EF;
+  --lichtpaars:#B98AC9;--tekst:#3A3346;--grijs:#6B6478;--lijn:#E7DFEB;--wit:#fff;--bg:#FBF9FC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--tekst);line-height:1.6;font-size:15px}
+button{font-family:inherit}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--donker) 0%,#4A2766 55%,var(--paars) 100%);color:#fff;padding:56px 20px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-90px;top:-90px;width:340px;height:340px;border-radius:50%;background:var(--magenta);opacity:.18}
+.hero-in{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.hero-label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:#F6B7D6;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.12;max-width:760px;margin-bottom:16px}
+.hero h1 span{color:#FF7DB8}
+.hero p{font-size:17px;max-width:680px;opacity:.88}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--lijn);box-shadow:0 2px 10px rgba(45,26,68,.06)}
+.nav-in{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px}
+@media(max-width:700px){.nav-in{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}}
+.tab{flex-shrink:0;border:1px solid var(--lijn);background:#fff;color:var(--grijs);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab:hover{border-color:var(--paars);color:var(--paars)}
+.tab.on{background:var(--paars);border-color:var(--paars);color:#fff}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:40px 16px 24px}
+.pnl{display:none;animation:in .35s ease}
+.pnl.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--magenta);margin-bottom:8px}
+h2.titel{font-size:clamp(24px,3.2vw,34px);font-weight:800;color:var(--donker);line-height:1.18;margin-bottom:10px}
+.intro{font-size:16.5px;color:var(--grijs);max-width:760px;margin-bottom:30px}
+h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.kaart{background:#fff;border:1px solid var(--lijn);border-radius:14px;padding:22px}
+.kaart h4{font-size:16px;font-weight:700;color:var(--donker);margin-bottom:6px}
+.kaart p{font-size:14px;color:var(--tekst)}
+.kaart.top{border-top:4px solid var(--magenta)}
+.kaart.top.p{border-top-color:var(--paars)}
+.lila{background:var(--lila);border:none}
+.icoon{width:46px;height:46px;border-radius:50%;background:var(--paars);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.icoon.m{background:var(--magenta)}
+.banner{background:var(--roze);border-radius:14px;padding:20px 24px;color:var(--paars);font-weight:700;font-size:16px;line-height:1.5;margin-top:26px}
+.noot{font-size:13px;color:var(--grijs);background:var(--lila);border-radius:10px;padding:12px 16px;margin-top:18px}
+.vervolg{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:24px;border-top:1px solid var(--lijn)}
+.vbtn{border:1px solid var(--lijn);background:#fff;color:var(--paars);font-weight:600;font-size:14px;padding:10px 20px;border-radius:24px;cursor:pointer}
+.vbtn.pri{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.vbtn:disabled{opacity:.35;cursor:default}
+
+/* WELKOM */
+.kern{background:#fff;border-radius:18px;border:1px solid var(--lijn);padding:30px;font-size:21px;font-weight:700;color:var(--donker);line-height:1.4;border-left:6px solid var(--magenta)}
+.belangen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media(max-width:760px){.belangen{grid-template-columns:1fr}}
+.belang{background:#fff;border:1px solid var(--lijn);border-radius:14px;padding:22px;text-align:center}
+.belang .rond{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--lila)}
+.belang h4{color:var(--paars);font-size:16px;margin-bottom:6px}
+.belang p{font-size:14px}
+.vraag-lijst{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:10px}
+@media(max-width:600px){.vraag-lijst{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}}
+.vraag-lijst li{background:#fff;border:1px solid var(--lijn);border-radius:10px;padding:12px 14px;font-size:14px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;transition:all .2s}
+.vraag-lijst li:hover{border-color:var(--magenta);transform:translateY(-1px)}
+.vraag-lijst li span{color:var(--magenta);font-weight:800}
+
+/* CIJFERS */
+.cijfers{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:10px 0 26px}
+.cijfer .n{font-size:clamp(46px,7vw,78px);font-weight:800;line-height:1}
+.cijfer .l{font-size:15px;color:var(--grijs);margin-top:4px}
+.pijl{font-size:36px;color:var(--lichtpaars)}
+
+/* BEROEPSTYPEN */
+.clusters{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.clusters{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.clusters{grid-template-columns:1fr}}
+.cl-kop{border-radius:12px;color:#fff;font-weight:700;text-align:center;padding:14px 10px;font-size:15px;line-height:1.3;margin-bottom:10px}
+.cl-kop.m{background:var(--magenta)}.cl-kop.p{background:var(--paars)}
+.bt{display:flex;align-items:center;gap:12px;width:100%;background:var(--lila);border:2px solid transparent;border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;text-align:left;transition:all .2s}
+.bt:hover{border-color:var(--lichtpaars)}
+.bt.on{border-color:var(--magenta);background:#fff;box-shadow:0 4px 14px rgba(216,27,120,.15)}
+.bt .nr{font-size:24px;font-weight:800;min-width:38px}
+.bt .nr.m{color:var(--magenta)}.bt .nr.p{color:var(--paars)}
+.bt .nm{font-size:14px;font-weight:700;color:var(--donker);line-height:1.3}
+.detail{background:#fff;border:1px solid var(--lijn);border-radius:16px;padding:26px;margin-top:20px;border-top:5px solid var(--magenta)}
+.detail-kop{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.detail-kop .nr{font-size:38px;font-weight:800;color:var(--magenta);line-height:1}
+.detail-kop h4{font-size:22px;color:var(--donker)}
+.detail-kop .cl{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--paars);background:var(--lila);padding:4px 10px;border-radius:12px}
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:640px){.dgrid{grid-template-columns:1fr}}
+.dblok{background:var(--bg);border-radius:10px;padding:14px 16px;border-left:3px solid var(--lichtpaars)}
+.dblok.k{border-left-color:var(--magenta);background:var(--roze)}
+.dblok .lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--paars);margin-bottom:5px}
+.dblok p{font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{font-size:12.5px;background:#fff;border:1px solid var(--lijn);border-radius:14px;padding:3px 10px;color:var(--tekst)}
+
+/* VIO */
+.igm{display:flex;gap:12px;align-items:stretch;margin-bottom:10px}
+@media(max-width:760px){.igm{flex-direction:column}.igm .pl{transform:rotate(90deg);align-self:center}}
+.igm-b{flex:1;border-radius:14px;padding:18px;background:#fff;border:2px solid var(--lijn)}
+.igm-b.w{border-color:var(--paars)}.igm-b.k{border-color:var(--lichtpaars)}.igm-b.d{border-color:var(--magenta);background:var(--roze);flex:.7;display:flex;flex-direction:column;justify-content:center}
+.igm-b h4{font-size:18px;font-weight:800;margin-bottom:4px}
+.igm-b.w h4{color:var(--paars)}.igm-b.k h4{color:#8A5BA0}.igm-b.d h4{color:var(--magenta)}
+.igm-b .vr{font-size:13px;color:var(--grijs);font-style:italic;margin-bottom:12px}
+.igm .pl{align-self:center;font-size:26px;color:var(--lichtpaars)}
+.fac{display:block;width:100%;text-align:left;background:var(--bg);border:1px solid var(--lijn);border-radius:9px;padding:9px 12px;margin-bottom:7px;cursor:pointer;transition:all .2s}
+.fac:hover,.fac.on{border-color:var(--magenta);background:#fff}
+.fac b{font-size:13.5px;color:var(--donker);display:block}
+.fac .uitleg{display:none;font-size:13px;color:var(--tekst);margin-top:6px;line-height:1.5}
+.fac.on .uitleg{display:block}
+.fac .plus{float:right;color:var(--magenta);font-weight:800}
+.matrix-wrap{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:stretch}
+.as-y{writing-mode:vertical-rl;transform:rotate(180deg);background:var(--donker);color:#fff;border-radius:8px;padding:10px 6px;font-size:12px;font-weight:700;text-align:center;letter-spacing:1px}
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mv{border-radius:14px;padding:18px;border:2px solid}
+.mv h4{font-size:17px;font-weight:800;margin-bottom:2px}
+.mv .pos{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;opacity:.75;margin-bottom:8px}
+.mv p{font-size:13.5px}
+.mv .wij{margin-top:10px;font-size:13px;font-weight:600;padding-top:8px;border-top:1px dashed rgba(0,0,0,.15)}
+.mv.oh{background:#FFF4EA;border-color:#E9A15C;color:#7A3F0B}
+.mv.kl{background:#F1F8EA;border-color:#7DB352;color:#355E14}
+.mv.sl{background:#F4F2F6;border-color:#B3ABBC;color:#4D4558}
+.mv.dr{background:var(--lila);border-color:var(--paars);color:#4A2766}
+.mv.uit{box-shadow:0 0 0 4px rgba(216,27,120,.25)}
+.as-x{grid-column:2;background:var(--donker);color:#fff;border-radius:8px;padding:8px;font-size:12px;font-weight:700;text-align:center;letter-spacing:1px}
+.prof{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+@media(max-width:760px){.prof{grid-template-columns:1fr}}
+.bar{margin-bottom:12px}
+.bar-l{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--donker);margin-bottom:4px}
+.bar-t{height:10px;background:#EEE8F1;border-radius:6px;overflow:hidden}
+.bar-f{height:100%;border-radius:6px}
+.bar-f.h{background:linear-gradient(90deg,#5E9E37,#8BC765)}
+.bar-f.m{background:linear-gradient(90deg,#E0A21A,#F2C65A)}
+.bar-f.l{background:linear-gradient(90deg,var(--magenta),#F27CB4)}
+.bar-s{font-size:12px;color:var(--grijs);margin-top:3px}
+.groep{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--paars);margin:14px 0 8px}
+.wat-levert{list-style:none}
+.wat-levert li{padding:9px 0 9px 26px;position:relative;font-size:14px;border-bottom:1px solid var(--lijn)}
+.wat-levert li:last-child{border-bottom:none}
+.wat-levert li::before{content:'✓';position:absolute;left:0;color:var(--magenta);font-weight:800}
+
+/* DIENSTEN */
+.dienst-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:760px){.dienst-tabs{grid-template-columns:1fr 1fr}}
+.dtab{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--lijn);border-radius:12px;padding:14px;cursor:pointer;text-align:left;transition:all .2s}
+.dtab:hover{border-color:var(--lichtpaars)}
+.dtab.on{border-color:var(--magenta);background:var(--roze)}
+.dtab .ic{width:38px;height:38px;border-radius:50%;background:var(--paars);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.dtab.on .ic{background:var(--magenta)}
+.dtab span{font-size:14px;font-weight:700;color:var(--donker);line-height:1.3}
+.dienst-detail{background:#fff;border:1px solid var(--lijn);border-radius:16px;padding:26px}
+.dienst-detail h4{font-size:21px;color:var(--donker);margin-bottom:4px}
+.dienst-detail .ond{color:var(--grijs);margin-bottom:18px}
+
+/* STAPPEN */
+.stappen{display:flex;gap:0;margin-bottom:18px;position:relative}
+@media(max-width:700px){.stappen{flex-wrap:wrap;gap:8px}}
+.stap{flex:1;text-align:center;cursor:pointer;padding:0 4px;position:relative;background:none;border:none}
+.stap .bol{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;background:var(--lila);color:var(--paars);border:2px solid var(--lichtpaars);position:relative;z-index:2;transition:all .2s}
+.stap.on .bol{background:var(--magenta);color:#fff;border-color:var(--magenta);transform:scale(1.08)}
+.stap .t{font-size:13px;font-weight:700;color:var(--donker);line-height:1.3}
+.stap:not(:last-child)::after{content:'';position:absolute;top:24px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;background:var(--lichtpaars);z-index:1}
+@media(max-width:700px){.stap{flex:0 0 calc(33% - 8px)}.stap::after{display:none}}
+.stap-detail{background:#fff;border:1px solid var(--lijn);border-radius:16px;padding:24px;border-left:6px solid var(--magenta)}
+.stap-detail h4{font-size:19px;color:var(--donker);margin-bottom:8px}
+.vormen .kaart h4{display:flex;gap:10px;align-items:center}
+.label{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:12px;margin-bottom:10px}
+.label.m{background:var(--roze);color:var(--magenta)}.label.p{background:var(--lila);color:var(--paars)}.label.g{background:#F1F0F3;color:var(--grijs)}
+.groei{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;font-size:13px;font-weight:600;color:var(--paars)}
+.groei .pil{background:var(--lila);padding:6px 14px;border-radius:16px}
+
+/* SO + SROI */
+.type-k{background:#fff;border:1px solid var(--lijn);border-radius:16px;overflow:hidden}
+.type-k .kop{padding:16px 20px;color:#fff}
+.type-k .kop small{display:block;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;opacity:.8}
+.type-k .kop h4{font-size:17px}
+.type-k .lijf{padding:18px 20px}
+.type-k .lijf p{font-size:14px;margin-bottom:12px}
+.type-k .mw{background:var(--bg);border-radius:10px;padding:12px 14px;font-size:13.5px}
+.type-k .mw b{color:var(--paars);display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.netwerk{display:flex;align-items:stretch;gap:12px;margin-top:6px}
+@media(max-width:760px){.netwerk{flex-direction:column}}
+.nw{flex:1;background:#fff;border:1px solid var(--lijn);border-radius:14px;padding:18px;text-align:center}
+.nw .rond{width:54px;height:54px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--lila)}
+.nw h4{font-size:15px;color:var(--donker);margin-bottom:4px}
+.nw p{font-size:13px;color:var(--grijs)}
+.nw-pijl{align-self:center;font-size:22px;color:var(--lichtpaars)}
+.blok-nr{width:40px;height:40px;border-radius:50%;background:var(--magenta);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px}
+.blok-nr.p{background:var(--paars)}.blok-nr.l{background:var(--lichtpaars)}
+
+/* SCENARIO */
+.scen{background:#fff;border:1px solid var(--lijn);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.scen .kop{background:var(--lila);padding:18px 20px}
+.scen .kop small{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--magenta)}
+.scen .kop h4{font-size:17px;color:var(--donker);margin-top:2px}
+.scen .lijf{padding:18px 20px;flex:1}
+.scen .rij{margin-bottom:12px}
+.scen .rij b{display:block;font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--paars);margin-bottom:3px}
+.scen .rij p{font-size:13.5px}
+.illu{font-size:12px;color:var(--grijs);font-style:italic;padding:10px 20px;border-top:1px solid var(--lijn)}
+
+/* CONTACT */
+.contact{background:linear-gradient(135deg,var(--donker),var(--paars));color:#fff;border-radius:20px;padding:40px 32px;text-align:center}
+.contact h3{font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:10px}
+.contact p{opacity:.88;max-width:620px;margin:0 auto 22px}
+.mail{display:inline-block;background:var(--magenta);color:#fff;font-weight:700;padding:14px 28px;border-radius:28px;text-decoration:none;font-size:16px}
+.voet{text-align:center;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--grijs);padding:28px 16px 40px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-label">Den Haag Werkt · Werkgeversdienstverlening</div>
+    <h1>Samen talent benutten en <span>werk passend maken</span></h1>
+    <p>Den Haag Werkt verbindt werkgevers met Haagse werkzoekenden die een steun in de rug nodig hebben. Samen maken we werk passend, zodat zij duurzaam kunnen meedoen.</p>
+  </div>
+</header>
+
+<nav class="nav"><div class="nav-in" id="tabs"></div></nav>
+
+<main class="wrap">
+
+<!-- 0 WELKOM -->
+<section class="pnl" data-titel="Welkom">
+  <div class="kicker">Onze werkgeversbenadering</div>
+  <h2 class="titel">Een partner in inclusief werkgeverschap</h2>
+  <p class="intro">Den Haag Werkt is geen uitzendbureau. We werken voor Hagenaars met een afstand tot de arbeidsmarkt en zoeken werkgevers die hen een kans willen geven. We adviseren over inclusief werkgeverschap, zoeken samen naar werk dat past en ondersteunen u en uw nieuwe medewerker zolang dat nodig is.</p>
+
+  <div class="kern">“Samen met werkgevers benutten we talent, creëren we passende werkplekken en bouwen we aan een arbeidsmarkt waarin meer mensen duurzaam kunnen meedoen.”</div>
+
+  <h3 class="sub">Drie belangen die elkaar versterken</h3>
+  <div class="belangen">
+    <div class="belang"><div class="rond">🏢</div><h4>Werkgever</h4><p>Toegang tot talent dat u nu misschien over het hoofd ziet. Met aanpassingen in het werk kan dat ook bijdragen aan lastig vervulbare functies. Daarbij praktische ondersteuning en een toekomstbestendig personeelsbeleid.</p></div>
+    <div class="belang"><div class="rond">🧑‍🔧</div><h4>Werkzoekende</h4><p>Een kans op betaald werk, ontwikkeling in de praktijk, begeleiding waar nodig en een duurzame plek op de arbeidsmarkt.</p></div>
+    <div class="belang"><div class="rond">🏙️</div><h4>Samenleving</h4><p>Een inclusieve arbeidsmarkt, meer bestaanszekerheid en beter gebruik van het arbeidspotentieel dat Den Haag al heeft.</p></div>
+  </div>
+
+  <h3 class="sub">Waar wilt u beginnen?</h3>
+  <ul class="vraag-lijst">
+    <li data-ga="5"><span>1</span>Wat kan Den Haag Werkt voor mijn organisatie betekenen?</li>
+    <li data-ga="2"><span>2</span>Welke mensen en talenten kunnen bij mijn organisatie komen werken?</li>
+    <li data-ga="3"><span>3</span>Wat vraagt inclusief werkgeverschap van mij en wat levert het op?</li>
+    <li data-ga="4"><span>4</span>Welke ondersteuning krijg ik bij werving, begeleiding en ontwikkeling?</li>
+    <li data-ga="5"><span>5</span>Hoe gaan we een duurzame samenwerking aan?</li>
+    <li data-ga="7"><span>6</span>Hoe vul ik mijn SROI-verplichting in met blijvende waarde?</li>
+  </ul>
+</section>
+
+<!-- 1 WIE ZOEKEN WE -->
+<section class="pnl" data-titel="Wie we zoeken">
+  <div class="kicker">Samenwerkingspartners</div>
+  <h2 class="titel">Werkgevers met wie we kansen bouwen</h2>
+  <p class="intro">We investeren graag in samenwerkingen waarin we meerdere mensen kansen kunnen bieden en samen kunnen bouwen aan duurzame werkgelegenheid. Daarbij herkennen we vijf kenmerken. U hoeft ze niet allemaal al in huis te hebben: ook een eerste stap is welkom.</p>
+  <div class="g3">
+    <div class="kaart top"><div class="icoon m">↻</div><h4>Volume en continuïteit</h4><p>U heeft terugkerende personeelsbehoefte, meerdere passende functies of ruimte om structureel werkplekken te maken. Het gaat ons om duurzame capaciteit, niet alleen om een losse vacature.</p></div>
+    <div class="kaart top p"><div class="icoon">♡</div><h4>Inclusieve intentie</h4><p>U wilt talent een kans geven, staat open voor verschillende achtergronden en onderzoekt graag samen hoe werk passend gemaakt kan worden.</p></div>
+    <div class="kaart top"><div class="icoon m">⚙</div><h4>Passende werkzaamheden</h4><p>U heeft taken of functies die aansluiten bij de mogelijkheden van onze kandidaten, eventueel met begeleiding, opleiding of een aanpassing in het werk.</p></div>
+    <div class="kaart top p"><div class="icoon">↗</div><h4>Ontwikkelmogelijkheden</h4><p>Bij u kunnen medewerkers leren, groeien en duurzaam blijven werken. Zo wordt een eerste baan het begin van een loopbaan.</p></div>
+    <div class="kaart top"><div class="icoon m">🤝</div><h4>Duurzaam partnerschap</h4><p>U wilt investeren in een structurele relatie, met gezamenlijke afspraken en een gedeelde verantwoordelijkheid voor het resultaat.</p></div>
+    <div class="kaart lila"><h4>Kleiner of gespecialiseerd?</h4><p>Bedrijfsgrootte is voor ons geen harde grens. Ook kleinere werkgevers en gespecialiseerde sociaal ondernemers bieden waardevolle kansen. Neem gerust contact op, dan kijken we samen wat past.</p></div>
+  </div>
+</section>
+
+<!-- 2 BEROEPSTYPEN -->
+<section class="pnl" data-titel="12 beroepstypen">
+  <div class="kicker">Onze focus</div>
+  <h2 class="titel">Twaalf beroepstypen waar kansen liggen</h2>
+  <p class="intro">Onze plaatsingen concentreren zich in herkenbaar werk. Daarom richten we ons op twaalf beroepstypen. Herkent u hierin werk uit uw eigen organisatie? Dan ligt een samenwerking voor de hand.</p>
+
+  <div class="cijfers">
+    <div class="cijfer"><div class="n" style="color:var(--magenta)">80%</div><div class="l">van onze plaatsingen</div></div>
+    <div class="pijl">→</div>
+    <div class="cijfer"><div class="n" style="color:var(--paars)">36</div><div class="l">beroepen</div></div>
+    <div class="pijl">→</div>
+    <div class="cijfer"><div class="n" style="color:var(--donker)">12</div><div class="l">beroepstypen</div></div>
+  </div>
+
+  <p style="font-size:14px;color:var(--grijs);margin-bottom:16px">Klik op een beroepstype voor werkzaamheden, werkgevers, instapfuncties en ondersteuning.</p>
+  <div class="clusters" id="clusters"></div>
+  <div class="detail" id="bt-detail"></div>
+
+  <div class="banner">Deze twaalf beroepstypen geven richting aan onze focus. Heeft u passend werk dat er niet tussen staat? Dat bespreken we graag.</div>
+</section>
+
+<!-- 3 VIO -->
+<section class="pnl" data-titel="Inclusief werkgeverschap">
+  <div class="kicker">Inclusief werkgeverschap</div>
+  <h2 class="titel">Van willen, via kunnen, naar doen</h2>
+  <p class="intro">Inclusief werkgeverschap betekent dat u mensen met een afstand tot de arbeidsmarkt duurzaam werk wilt bieden, en dat ook doet. Om samen te ontdekken waar uw organisatie staat, gebruiken we de VIO: de Vragenlijst Inclusief Ondernemen van TNO.</p>
+
+  <div class="igm">
+    <div class="igm-b w"><h4>Willen</h4><div class="vr">Motivatie, overtuiging en vertrouwen</div><div id="fac-willen"></div></div>
+    <div class="pl">→</div>
+    <div class="igm-b k"><h4>Kunnen</h4><div class="vr">Kennis, organisatie en randvoorwaarden</div><div id="fac-kunnen"></div></div>
+    <div class="pl">→</div>
+    <div class="igm-b d"><h4>Doen</h4><div class="vr" style="margin-bottom:6px">Het resultaat</div><p style="font-size:14px">Mensen daadwerkelijk aannemen, begeleiden, ontwikkelen en behouden.</p></div>
+  </div>
+  <p style="font-size:13px;color:var(--grijs)">Klik op een onderdeel voor de vraag die erachter zit.</p>
+
+  <h3 class="sub">Wat levert de VIO u op?</h3>
+  <div class="g2">
+    <ul class="wat-levert kaart">
+      <li>Inzicht in hoe uw organisatie er nu voor staat</li>
+      <li>Een goed gesprek over mogelijkheden en uitdagingen</li>
+      <li>Praktische handvatten om inclusief werken makkelijker te maken</li>
+      <li>Gerichte ondersteuning op de onderwerpen waar groei mogelijk is</li>
+      <li>Een concreet vertrekpunt voor gezamenlijke afspraken</li>
+    </ul>
+    <div class="kaart lila"><h4>Geen examen</h4><p>De VIO is een hulpmiddel voor inzicht en ontwikkeling. Geen beoordeling, geen keurmerk en geen verplichting. Het invullen kost ongeveer een kwartier. Het gesprek over de uitkomst is minstens zo waardevol als de scores zelf. Vullen meerdere collega's de vragenlijst in, dan worden verschillen in perspectief zichtbaar, en ook dat levert gespreksstof op.</p></div>
+  </div>
+
+  <h3 class="sub">Iedere werkgever heeft een ander vertrekpunt</h3>
+  <p style="margin-bottom:16px;max-width:760px">De combinatie van willen en doen laat zien waar u staat. Dat is geen oordeel, maar een startpunt. Wij stemmen onze ondersteuning daarop af.</p>
+  <div class="matrix-wrap">
+    <div class="as-y">↑ DOEN</div>
+    <div class="matrix">
+      <div class="mv oh" id="mv-oh"><div class="pos">Doet het al · wil het nog niet bewust</div><h4>Onbewuste helden</h4><p>U biedt al kansen, vaak vanzelf en uit praktische noodzaak. Het gebeurt, maar staat nog niet op de agenda.</p><div class="wij">Samen: zichtbaar maken wat al werkt en het borgen in uw organisatie.</div></div>
+      <div class="mv kl" id="mv-kl"><div class="pos">Doet het · wil het</div><h4>Koplopers</h4><p>Inclusief werken is bij u verankerd in beleid en praktijk. U inspireert anderen.</p><div class="wij">Samen: uitbouwen, nieuwe functies ontwikkelen en uw ervaring delen met andere werkgevers.</div></div>
+      <div class="mv sl" id="mv-sl"><div class="pos">Nog niet bezig · nog geen prioriteit</div><h4>Slapers</h4><p>Inclusief werkgeverschap speelt nog niet bij u, of andere zaken gaan nu voor. Dat kan veranderen.</p><div class="wij">Samen: laagdrempelig kennismaken en inspiratie opdoen, op een moment dat u past.</div></div>
+      <div class="mv dr" id="mv-dr"><div class="pos">Wil het · komt nog niet tot actie</div><h4>Dromers</h4><p>De wil is er, maar de vertaling naar de praktijk stokt. Vaak ontbreekt kennis, tijd of een concreet plan.</p><div class="wij">Samen: een haalbaar plan, kleine eerste stappen en hulp bij regelingen.</div></div>
+    </div>
+    <div class="as-x">WILLEN →</div>
+  </div>
+
+  <h3 class="sub">Zo ziet een uitkomst eruit</h3>
+  <div class="prof">
+    <div class="kaart">
+      <div style="font-size:12px;color:var(--grijs);font-style:italic;margin-bottom:6px">Illustratief voorbeeld · distributiecentrum met 120 medewerkers</div>
+      <div class="groep">Willen</div>
+      <div id="profiel-w"></div>
+      <div class="groep">Kunnen</div>
+      <div id="profiel-k"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="kaart" style="border-left:5px solid var(--paars)"><div class="label p">Uitkomst: Dromer</div><p>Het management wil graag en heeft vertrouwen dat het kan. De omzetting naar de praktijk blijft achter: er is geen concreet plan, weinig kennis van regelingen en geen afspraak over wat te doen als het tegenzit.</p></div>
+      <div class="kaart lila"><h4>Wat we dan samen doen</h4><ul class="wat-levert" style="margin-top:6px"><li>Samen een eerste plan maken: welke afdeling, welke taken, wie begeleidt</li><li>Uitleg over regelingen zoals proefplaatsing en no-riskpolis</li><li>Starten met één of twee plaatsingen als snelle eerste stap</li><li>Vooraf afspreken wie u belt als het even niet loopt</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 DIENSTVERLENING -->
+<section class="pnl" data-titel="Onze ondersteuning">
+  <div class="kicker">Wat wij bieden</div>
+  <h2 class="titel">Concrete ondersteuning, afgestemd op uw organisatie</h2>
+  <p class="intro">Van de eerste kandidaat tot een structureel inclusief personeelsbeleid. Kies een onderwerp om te zien wat het inhoudt, wanneer het interessant is en wat het u oplevert.</p>
+  <div class="dienst-tabs" id="dienst-tabs"></div>
+  <div class="dienst-detail" id="dienst-detail"></div>
+  <div class="noot">Instrumenten en financiële regelingen hangen af van voorwaarden, beschikbaarheid en de situatie van de kandidaat. In een persoonlijk gesprek bekijken we wat in uw situatie mogelijk is.</div>
+</section>
+
+<!-- 5 SAMENWERKEN -->
+<section class="pnl" data-titel="Samenwerken">
+  <div class="kicker">Van vacature naar samenwerking</div>
+  <h2 class="titel">Zo bouwen we samen aan resultaat</h2>
+  <p class="intro">Een losse vacature invullen is waardevol. Een samenwerking waarin inclusief werken onderdeel wordt van uw reguliere personeelsbeleid levert meer op, voor u én voor de mensen die bij u komen werken.</p>
+  <div class="stappen" id="stappen"></div>
+  <div class="stap-detail" id="stap-detail"></div>
+
+  <h3 class="sub">Drie manieren om samen te werken</h3>
+  <div class="g3 vormen">
+    <div class="kaart"><div class="label m">Direct</div><h4>Directe ondersteuning</h4><p>U heeft een concrete vacature, een vraag over een regeling of behoefte aan praktische hulp. We schakelen snel en kijken wat er nu mogelijk is.</p></div>
+    <div class="kaart" style="border:2px solid var(--magenta)"><div class="label p">Structureel</div><h4>Intensieve samenwerking</h4><p>U wilt structureel kansen creëren, meerdere mensen plaatsen of uw organisatie verder ontwikkelen. U krijgt een vaste accountmanager en we maken samen een samenwerkingsplan.</p></div>
+    <div class="kaart"><div class="label g">Digitaal</div><h4>Digitale dienstverlening</h4><p>U meldt zelf vacatures aan, zoekt informatie over instrumenten of houdt op een laagdrempelige manier contact via Hallo Werk, ons digitale werkgeversplatform.</p></div>
+  </div>
+  <div class="groei"><span class="pil">Begin in uw eigen tempo</span>→<span class="pil">De samenwerking groeit mee met uw ambitie</span></div>
+</section>
+
+<!-- 6 SOCIAAL ONDERNEMERS -->
+<section class="pnl" data-titel="Sociaal ondernemers">
+  <div class="kicker">Sociaal ondernemerschap</div>
+  <h2 class="titel">Sociaal ondernemers: serieuze werkgevers met een eigen functie</h2>
+  <p class="intro">Sociaal ondernemers bieden werk aan mensen voor wie een reguliere werkomgeving (nog) te veel vraagt. Ze kennen de doelgroep, weten wat begeleiding vraagt en hebben vaak eigen begeleiders in dienst. We onderscheiden drie typen. Ze zijn gelijkwaardig, vervullen ieder een eigen maatschappelijke en economische functie en kunnen kenmerken combineren.</p>
+  <div class="g3">
+    <div class="type-k"><div class="kop" style="background:var(--magenta)"><small>Type 1</small><h4>Ontwikkel- en doorstroomplek</h4></div><div class="lijf"><p>Mensen bouwen in de praktijk werkritme, vaardigheden en belastbaarheid op en groeien naar een volgende stap.</p><div class="mw"><b>Wat wij bieden</b>Passende instroom, ondersteuning bij begeleiding, ontwikkelmogelijkheden en verbinding met werkgevers voor de volgende stap.</div></div></div>
+    <div class="type-k"><div class="kop" style="background:var(--paars)"><small>Type 2</small><h4>Duurzame werkplek</h4></div><div class="lijf"><p>Een structurele werkplek met begeleiding en aanpassingen die passen bij wat iemand kan. Voor sommige mensen is dit de meest passende plek, geen tussenstop.</p><div class="mw"><b>Wat wij bieden</b>Ondersteuning bij duurzame inzetbaarheid, passende begeleiding en een langdurige samenwerking.</div></div></div>
+    <div class="type-k"><div class="kop" style="background:var(--donker)"><small>Type 3</small><h4>Sociaal detacheerder</h4></div><div class="lijf"><p>Neemt mensen in dienst en laat hen, waar passend, werken bij andere werkgevers, met aanvullende begeleiding en een vangnet.</p><div class="mw"><b>Wat wij bieden</b>Verbinding met reguliere werkgevers, nieuwe opdrachten, begeleiding en kansen op duurzame plaatsing.</div></div></div>
+  </div>
+
+  <h3 class="sub">Eén netwerk, geen vaste route</h3>
+  <div class="netwerk">
+    <div class="nw"><div class="rond">🌱</div><h4>Sociaal ondernemer</h4><p>Ontwikkeling, stabiliteit of een brug naar ander werk</p></div>
+    <div class="nw-pijl">⇄</div>
+    <div class="nw"><div class="rond">📋</div><h4>Werkgever met SROI</h4><p>Instapbanen in een reguliere omgeving, of inkoop bij sociaal ondernemers</p></div>
+    <div class="nw-pijl">⇄</div>
+    <div class="nw"><div class="rond">🏢</div><h4>Reguliere werkgever</h4><p>Structureel werk met doorgroei en loopbaanperspectief</p></div>
+  </div>
+  <div class="banner">Sommige mensen ontwikkelen zich richting een andere werkgever. Voor anderen is een duurzame plek bij een sociaal ondernemer de juiste bestemming. De route is altijd maatwerk.</div>
+</section>
+
+<!-- 7 SROI -->
+<section class="pnl" data-titel="SROI">
+  <div class="kicker">Social Return on Investment</div>
+  <h2 class="titel">Uw SROI-verplichting als kans</h2>
+  <p class="intro">Uw SROI-verplichting biedt ook kansen om talent te ontdekken en duurzame werkgelegenheid te creëren. Wij helpen u om er meer uit te halen dan een vinkje op het contract.</p>
+  <div class="g2">
+    <div class="kaart"><h4>Wat is SROI?</h4><p>Bij opdrachten van de gemeente Den Haag kan een SROI-verplichting gelden. U zet dan een deel van de opdrachtwaarde in voor maatschappelijke waarde, bijvoorbeeld door mensen met een afstand tot de arbeidsmarkt werk of een ontwikkelplek te bieden.</p></div>
+    <div class="kaart lila"><h4>Waarom het verder reikt dan het contract</h4><p>Werkgevers die via SROI voor het eerst met onze kandidaten werken, ontdekken vaak dat het meer oplevert dan verwacht: loyale medewerkers, invulling van lastige vacatures en een zichtbare bijdrage aan de stad. Een instapbaan die werkt, blijft ook na afloop van de opdracht waardevol.</p></div>
+  </div>
+
+  <h3 class="sub">Drie bouwblokken voor invulling</h3>
+  <div class="g3">
+    <div class="kaart"><div class="blok-nr">1</div><h4>Werk of ontwikkelplekken bieden</h4><p>U neemt zelf iemand in dienst of biedt een werk- of leerplek. Dit levert de meeste directe impact op, en hier ondersteunen we u het meest intensief: van het inrichten van een instapbaan tot begeleiding op de werkvloer.</p></div>
+    <div class="kaart"><div class="blok-nr p">2</div><h4>Maatschappelijk inkopen</h4><p>U koopt producten of diensten in bij sociaal ondernemers. Dat is soms een goede eerste stap wanneer directe plaatsing nog niet haalbaar is.</p></div>
+    <div class="kaart"><div class="blok-nr l">3</div><h4>Andere maatschappelijke meerwaarde</h4><p>Bijvoorbeeld stages, gastlessen of werkbezoeken. Zo verlaagt u drempels en legt u de basis voor een structurelere samenwerking.</p></div>
+  </div>
+  <div class="noot">Welke invulling mogelijk is, hangt af van de voorwaarden in uw contract en het geldende Haagse SROI-beleid. Uw contactpersoon voor SROI bespreekt dit met u.</div>
+
+  <h3 class="sub">Hoe wij u ondersteunen</h3>
+  <div class="g4">
+    <div class="kaart"><h4>Verkennen</h4><p>We starten bij uw personeelsvraag, niet bij de verplichting. Waar zit verloop, welke taken blijven liggen?</p></div>
+    <div class="kaart"><h4>Inrichten</h4><p>Samen ontwerpen we een instapbaan, met jobcarving en draagvlak op de afdeling.</p></div>
+    <div class="kaart"><h4>Begeleiden</h4><p>Jobcoaching op de werkvloer en hulp bij regelingen, zodat het geen extra last wordt.</p></div>
+    <div class="kaart"><h4>Doorbouwen</h4><p>Werkt het? Dan bekijken we samen een volgende plek of een bredere samenwerking.</p></div>
+  </div>
+</section>
+
+<!-- 8 PRAKTIJK -->
+<section class="pnl" data-titel="In de praktijk">
+  <div class="kicker">Inspiratie</div>
+  <h2 class="titel">Zo kan het er in de praktijk uitzien</h2>
+  <p class="intro">Drie herkenbare situaties die laten zien hoe een samenwerking kan verlopen. Het zijn illustraties, gebaseerd op hoe wij werken, geen beschrijvingen van bestaande werkgevers.</p>
+  <div class="g3">
+    <div class="scen"><div class="kop"><small>Logistiek · magazijnmedewerker</small><h4>Een distributiecentrum met steeds dezelfde vacatures</h4></div><div class="lijf">
+      <div class="rij"><b>De vraag</b><p>Het bedrijf zoekt continu orderpickers en ziet veel verloop onder uitzendkrachten.</p></div>
+      <div class="rij"><b>De aanpak</b><p>Samen kijken we welke taken los te maken zijn, zoals inpakken, labelen en retouren verwerken. Daar ontstaat een instapfunctie. Kandidaten starten met een proefplaatsing en een vaste begeleider op de vloer.</p></div>
+      <div class="rij"><b>Wat het oplevert</b><p>Vaste krachten die het bedrijf zelf heeft ingewerkt, en een route waarin medewerkers kunnen doorgroeien naar orderpicker.</p></div>
+    </div><div class="illu">Illustratief scenario</div></div>
+    <div class="scen"><div class="kop"><small>Zorg · zorgassistent</small><h4>Een zorgorganisatie waar verzorgenden te weinig tijd hebben</h4></div><div class="lijf">
+      <div class="rij"><b>De vraag</b><p>Verzorgenden besteden veel tijd aan taken buiten de zorg, zoals maaltijden rondbrengen en kamers op orde houden.</p></div>
+      <div class="rij"><b>De aanpak</b><p>Met functiecreatie bundelen we die taken in een nieuwe functie. Een leertraject in de praktijk en begeleiding na plaatsing zorgen voor een goede start.</p></div>
+      <div class="rij"><b>Wat het oplevert</b><p>Meer tijd voor zorg, minder werkdruk en nieuwe collega's die zich in de organisatie kunnen ontwikkelen.</p></div>
+    </div><div class="illu">Illustratief scenario</div></div>
+    <div class="scen"><div class="kop"><small>Bouw · SROI</small><h4>Een bouwbedrijf met een SROI-verplichting</h4></div><div class="lijf">
+      <div class="rij"><b>De vraag</b><p>Het bedrijf moet SROI invullen bij een gemeentelijk project en heeft nog geen ervaring met de doelgroep.</p></div>
+      <div class="rij"><b>De aanpak</b><p>We starten met een instapbaan als bouwplaatsmedewerker, met een jobcoach en een vaste leermeester. Voor een deel van de invulling werkt het bedrijf samen met een sociaal ondernemer.</p></div>
+      <div class="rij"><b>Wat het oplevert</b><p>Een ingevulde verplichting, een gemotiveerde medewerker en een instapbaan die ook bij het volgende project weer kan worden ingezet.</p></div>
+    </div><div class="illu">Illustratief scenario</div></div>
+  </div>
+
+  <h3 class="sub">Leren van en met andere werkgevers</h3>
+  <div class="g3">
+    <div class="kaart top"><h4>Werkgeversbijeenkomsten</h4><p>Ontmoet werkgevers die al inclusief werken en hoor hoe zij het hebben aangepakt.</p></div>
+    <div class="kaart top p"><h4>Kennis delen</h4><p>Themasessies over onder meer jobcarving, begeleiding op de werkvloer en regelingen.</p></div>
+    <div class="kaart top"><h4>Uw verhaal als inspiratie</h4><p>Werkgevers die het goed doen, laten anderen zien dat het kan. Met uw toestemming maken we dat zichtbaar.</p></div>
+  </div>
+</section>
+
+<!-- 9 CONTACT -->
+<section class="pnl" data-titel="Contact">
+  <div class="contact">
+    <h3>Zullen we kennismaken?</h3>
+    <p>Vertel ons over uw organisatie en het werk dat u heeft. Dan verkennen we samen waar kansen liggen voor onze kandidaten, of het nu gaat om een eerste plaatsing of een structurele samenwerking.</p>
+    <a class="mail" href="#" onclick="return false">[e-mailadres volgt]</a>
+  </div>
+  <h3 class="sub">In het kort</h3>
+  <div class="g4">
+    <div class="kaart"><h4>Talent</h4><p>Toegang tot gemotiveerde kandidaten in twaalf herkenbare beroepstypen.</p></div>
+    <div class="kaart"><h4>Passend werk</h4><p>Samen functies en taken zo inrichten dat ze werken.</p></div>
+    <div class="kaart"><h4>Ondersteuning</h4><p>Begeleiding, regelingen en ontwikkeling, afgestemd op uw situatie.</p></div>
+    <div class="kaart"><h4>Partnerschap</h4><p>Een samenwerking die meegroeit met uw ambitie.</p></div>
+  </div>
+</section>
+
+<div class="vervolg"><button class="vbtn" id="vorige">← Vorige</button><button class="vbtn pri" id="volgende">Volgende →</button></div>
+</main>
+
+<div class="voet">Den Haag Werkt | Werkgeversdienstverlening | Oktober 2026</div>
+
+<script>
+// ===== NAVIGATIE =====
+var panelen = document.querySelectorAll('.pnl');
+var tabsEl = document.getElementById('tabs');
+var huidig = 0;
+panelen.forEach(function(p,i){
+  var b = document.createElement('button');
+  b.className = 'tab'; b.textContent = p.dataset.titel;
+  b.onclick = function(){ ga(i); };
+  tabsEl.appendChild(b);
+});
+function ga(i){
+  huidig = i;
+  panelen.forEach(function(p,j){ p.classList.toggle('on', j===i); });
+  var tabs = tabsEl.querySelectorAll('.tab');
+  tabs.forEach(function(t,j){ t.classList.toggle('on', j===i); });
+  if (window.innerWidth <= 700) tabsEl.scrollTo({left: Math.max(0, tabs[i].offsetLeft - 40), behavior:'smooth'});
+  document.getElementById('vorige').disabled = i===0;
+  document.getElementById('volgende').disabled = i===panelen.length-1;
+  var top = document.querySelector('.nav').offsetTop;
+  if (window.scrollY > top) window.scrollTo({top:top,behavior:'smooth'});
+}
+document.getElementById('vorige').onclick = function(){ if(huidig>0) ga(huidig-1); };
+document.getElementById('volgende').onclick = function(){ if(huidig<panelen.length-1) ga(huidig+1); };
+document.querySelectorAll('[data-ga]').forEach(function(el){ el.onclick = function(){ ga(+el.dataset.ga); }; });
+
+// ===== BEROEPSTYPEN =====
+var clusters = [
+  {naam:'Dienstverlening en klantcontact', kl:'m'},
+  {naam:'Zorg, schoonmaak en facilitair', kl:'p'},
+  {naam:'Logistiek, productie en vervoer', kl:'m'},
+  {naam:'Buitenruimte, toezicht en onderhoud', kl:'p'}
+];
+var beroepen = [
+ {nr:'01',c:0,naam:'Winkelmedewerker',
+  werk:'Schappen vullen, goederen ontvangen, kassawerk en klanten op weg helpen.',
+  wg:['Supermarkten','Bouwmarkten','Warenhuizen','Winkelketens'],
+  fn:['Vakkenvuller','Kassamedewerker','Medewerker vers','Verkoopmedewerker'],
+  st:'Inwerken met een vaste begeleider, praktijkleren in de winkel en waar nodig taalondersteuning op de werkvloer.',
+  kans:'Een stabiele bezetting in roosters met veel verloop, met medewerkers die u zelf opleidt.'},
+ {nr:'02',c:0,naam:'Medewerker service en administratie',
+  werk:'Post en archief verwerken, gegevens invoeren, receptie en telefoon, eenvoudige klantvragen beantwoorden.',
+  wg:['Zakelijke dienstverleners','Zorg en onderwijs','Overheidsorganisaties','Klantcontactcentra'],
+  fn:['Administratief medewerker','Archiefmedewerker','Receptionist','Medewerker klantenservice'],
+  st:'Routinetaken loskoppelen met jobcarving en begeleiding bij het inwerken in systemen en werkprocessen.',
+  kans:'Uw professionals houden tijd over voor hun kernwerk, terwijl uitvoerende taken goed geborgd zijn.'},
+ {nr:'03',c:0,naam:'Horecamedewerker',
+  werk:'Ondersteunen in de keuken, afwassen, bediening en werken in catering.',
+  wg:['Restaurants','Cateraars','Bedrijfsrestaurants','Hotels'],
+  fn:['Keukenassistent','Afwasser','Bedieningsmedewerker','Medewerker fastfood'],
+  st:'Starten met een proefplaatsing, praktijkleren en goede afspraken over rooster en werktempo.',
+  kans:'Vaste krachten in een krappe sector, in plaats van steeds wisselende inhuur.'},
+ {nr:'04',c:1,naam:'Zorgassistent',
+  werk:'Ondersteunen bij de dagelijkse zorg: maaltijden, gezelschap, huishoudelijke taken en begeleiding van kinderen.',
+  wg:['Thuiszorg','Verpleeghuizen','Gehandicaptenzorg','Kinderopvang'],
+  fn:['Zorghulp','Helpende','Gastvrouw of gastheer zorg','Medewerker kinderopvang'],
+  st:'Functiecreatie met taken die verzorgenden ontlasten, een leertraject in de praktijk en begeleiding na plaatsing.',
+  kans:'Zorgprofessionals krijgen meer tijd voor zorg en de werkdruk daalt.'},
+ {nr:'05',c:1,naam:'Schoonmaker en huishoudelijke hulp',
+  werk:'Schoonmaken van kantoren, scholen, zorglocaties en hotels, en huishoudelijke hulp bij mensen thuis.',
+  wg:['Schoonmaakbedrijven','Zorginstellingen','Hotels','Onderwijs'],
+  fn:['Schoonmaakmedewerker','Huishoudelijk medewerker','Medewerker housekeeping'],
+  st:'Inwerken in een vaste ploeg, een jobcoach bij de start en taalhulpmiddelen waar dat nodig is.',
+  kans:'Invulling van lastige roosters en een sterke bijdrage aan SROI bij gemeentelijke opdrachten.'},
+ {nr:'06',c:1,naam:'Facilitair medewerker',
+  werk:'Postkamer, conciërgetaken, kantine en vergaderzalen, bevoorrading en kleine klussen in het gebouw.',
+  wg:['Kantoororganisaties','Onderwijsinstellingen','Ziekenhuizen','Facilitaire dienstverleners'],
+  fn:['Facilitair medewerker','Conciërge','Medewerker postkamer','Medewerker kantine'],
+  st:'Functiecreatie door verspreide facilitaire taken te bundelen, eventueel met een aanpassing van de werkplek.',
+  kans:'Facilitaire taken die nu blijven liggen of bij duurdere collega\u0027s terechtkomen, krijgen een vaste eigenaar.'},
+ {nr:'07',c:2,naam:'Chauffeur en koerier',
+  werk:'Vervoeren van personen of goederen, bezorgrondes rijden en leveringen afhandelen.',
+  wg:['Koeriersdiensten','Pakketbezorgers','Personenvervoer','Groothandels'],
+  fn:['Bezorger','Koerier','Chauffeur bestelbus','Bijrijder'],
+  st:'Starten als bijrijder of bezorger, met opleiding waar dat passend en beschikbaar is.',
+  kans:'Met een instapfunctie en opleiding in de praktijk een bijdrage aan het tekort aan chauffeurs.'},
+ {nr:'08',c:2,naam:'Productiemedewerker',
+  werk:'Productie, assemblage, inpakken en eenvoudige kwaliteitscontrole aan de lijn of werkbank.',
+  wg:['Maakindustrie','Voedingsmiddelenindustrie','Verpakkingsbedrijven'],
+  fn:['Productiemedewerker','Inpakker','Assemblagemedewerker','Operator in opleiding'],
+  st:'Jobcarving langs de productielijn, werkplekaanpassing en praktijkleren met een erkend certificaat.',
+  kans:'Een stabiele bezetting op de lijn en medewerkers die u zelf opleidt tot vakkracht.'},
+ {nr:'09',c:2,naam:'Magazijnmedewerker',
+  werk:'Goederen ontvangen, opslaan, orderpicken, inpakken en verzenden.',
+  wg:['Distributiecentra','Webwinkels','Groothandels','Logistieke dienstverleners'],
+  fn:['Orderpicker','Magazijnmedewerker','Medewerker expeditie','Medewerker retouren'],
+  st:'Een instapfunctie met deeltaken, een proefplaatsing en waar mogelijk een heftruckcertificaat in de praktijk.',
+  kans:'Vaste krachten die pieken mee opvangen, met minder verloop dan bij wisselende inhuur.'},
+ {nr:'10',c:3,naam:'Medewerker groenvoorziening',
+  werk:'Onderhoud van groen, tuinen en openbare ruimte, en het schoonhouden van de buitenruimte.',
+  wg:['Hoveniers','Groenaannemers','Woningcorporaties','Beheerders openbare ruimte'],
+  fn:['Groenmedewerker','Hovenier in opleiding','Medewerker reiniging'],
+  st:'Werken in een vaste ploeg met een voorman als leermeester, eventueel met een vakopleiding in de praktijk.',
+  kans:'Extra capaciteit in het seizoen en medewerkers die u kunt opleiden tot vakkracht.'},
+ {nr:'11',c:3,naam:'Beveiliger en toezichthouder',
+  werk:'Toezicht houden, toegangscontrole, surveilleren en gastvrij aanspreekpunt zijn.',
+  wg:['Beveiligingsbedrijven','Winkelketens','Evenementenorganisaties','Zorginstellingen'],
+  fn:['Toezichthouder','Medewerker toegangscontrole','Beveiliger in opleiding'],
+  st:'Een leerroute naar het benodigde diploma waar dat mogelijk is. Diploma- en screeningseisen bespreken we vooraf.',
+  kans:'Gemotiveerde instroom in een beroep met structurele vraag.'},
+ {nr:'12',c:3,naam:'Medewerker bouw en onderhoud',
+  werk:'Onderhoud aan gebouwen, woningen en installaties, en ondersteunend werk op de bouwplaats.',
+  wg:['Bouwbedrijven','Onderhoudsbedrijven','Woningcorporaties','Installateurs'],
+  fn:['Onderhoudsmedewerker','Hulpmonteur','Bouwplaatsmedewerker'],
+  st:'Een vaste leermeester, een veiligheidscertificaat en praktijkleren. Vaak goed te combineren met SROI.',
+  kans:'Instroom in een sector met grote tekorten en een concrete invulling van SROI-afspraken.'}
+];
+var clEl = document.getElementById('clusters');
+clusters.forEach(function(c,ci){
+  var kol = document.createElement('div');
+  kol.innerHTML = '<div class="cl-kop '+c.kl+'">'+c.naam+'</div>';
+  beroepen.filter(function(b){return b.c===ci;}).forEach(function(b){
+    var btn = document.createElement('button');
+    btn.className = 'bt'; btn.dataset.nr = b.nr;
+    btn.innerHTML = '<span class="nr '+c.kl+'">'+b.nr+'</span><span class="nm">'+b.naam+'</span>';
+    btn.onclick = function(){ toonBeroep(b.nr, true); };
+    kol.appendChild(btn);
+  });
+  clEl.appendChild(kol);
+});
+function chips(a){ return '<div class="chips">'+a.map(function(x){return '<span class="chip">'+x+'</span>';}).join('')+'</div>'; }
+function toonBeroep(nr, scroll){
+  var b = beroepen.filter(function(x){return x.nr===nr;})[0];
+  document.querySelectorAll('.bt').forEach(function(x){ x.classList.toggle('on', x.dataset.nr===nr); });
+  var d = document.getElementById('bt-detail');
+  d.innerHTML = '<div class="detail-kop"><span class="nr">'+b.nr+'</span><h4>'+b.naam+'</h4><span class="cl">'+clusters[b.c].naam+'</span></div>'+
+   '<div class="dgrid">'+
+   '<div class="dblok"><div class="lab">Werkzaamheden</div><p>'+b.werk+'</p></div>'+
+   '<div class="dblok"><div class="lab">Werkgevers die we zoeken</div>'+chips(b.wg)+'</div>'+
+   '<div class="dblok"><div class="lab">Mogelijke instapfuncties</div>'+chips(b.fn)+'</div>'+
+   '<div class="dblok"><div class="lab">Begeleiding en ontwikkeling</div><p>'+b.st+'</p></div>'+
+   '</div><div class="dblok k" style="margin-top:14px"><div class="lab">Wat het u oplevert</div><p>'+b.kans+'</p></div>';
+  if (scroll && window.innerWidth < 900) d.scrollIntoView({behavior:'smooth',block:'start'});
+}
+toonBeroep('01', false);
+
+// ===== VIO FACTOREN =====
+var factoren = {
+ willen:[
+  ['Houding','Wat verwacht u dat het oplevert, en waar maakt u zich zorgen over? Denk aan het invullen van vacatures en uw imago, maar ook aan begeleidingstijd of verzuim.'],
+  ['Omgeving','Wat verwachten klanten, opdrachtgevers, collega\u0027s en uw branche van u? Steun uit de omgeving maakt de stap makkelijker.'],
+  ['Vertrouwen','Heeft u er vertrouwen in dat uw organisatie het kan organiseren, ook als het een keer tegenzit?']],
+ kunnen:[
+  ['Kennis en vaardigheden','Kent u de regelingen en de partijen die u kunnen helpen? Weten leidinggevenden hoe ze iemand inwerken en begeleiden?'],
+  ['Plan van aanpak','Zijn er concrete afspraken over wie wat doet en wanneer? Daar wordt een goed voornemen een resultaat.'],
+  ['Plan bij tegenslag','Is afgesproken wat u doet als een plaatsing anders loopt dan verwacht, en wie u dan belt?'],
+  ['Drempels','Welke drempels staan in de weg? Bijvoorbeeld geen passend werk, een hoog werktempo of weinig draagvlak op de afdeling.']]
+};
+function maakFac(id, lijst){
+  var el = document.getElementById(id);
+  lijst.forEach(function(f){
+    var b = document.createElement('button');
+    b.className = 'fac';
+    b.innerHTML = '<span class="plus">+</span><b>'+f[0]+'</b><span class="uitleg">'+f[1]+'</span>';
+    b.onclick = function(){ b.classList.toggle('on'); b.querySelector('.plus').textContent = b.classList.contains('on') ? '−' : '+'; };
+    el.appendChild(b);
+  });
+}
+maakFac('fac-willen', factoren.willen);
+maakFac('fac-kunnen', factoren.kunnen);
+document.getElementById('mv-dr').classList.add('uit');
+
+// ===== VOORBEELDPROFIEL (consistent: hoge intentie, laag gedrag = Dromer) =====
+var profiel = {
+ w:[['Houding',80,'h','Ziet kansen om vacatures in te vullen'],['Omgeving',74,'h','Directie en opdrachtgevers staan erachter'],['Vertrouwen',70,'h','Verwacht het te kunnen organiseren']],
+ k:[['Kennis en vaardigheden',42,'m','Regelingen nauwelijks bekend'],['Plan van aanpak',30,'l','Geen concrete afspraken over wie wat doet'],['Plan bij tegenslag',25,'l','Niet nagedacht over wat te doen bij uitval'],['Drempels',48,'m','Hoog werktempo; deeltaken nog niet in beeld']]
+};
+function balk(id, rijen){
+  document.getElementById(id).innerHTML = rijen.map(function(r){
+    return '<div class="bar"><div class="bar-l"><span>'+r[0]+'</span><span>'+r[1]+'%</span></div><div class="bar-t"><div class="bar-f '+r[2]+'" style="width:'+r[1]+'%"></div></div><div class="bar-s">'+r[3]+'</div></div>';
+  }).join('');
+}
+balk('profiel-w', profiel.w); balk('profiel-k', profiel.k);
+
+// ===== DIENSTEN =====
+var diensten = [
+ {ic:'👥',naam:'Kandidaten en matching',ond:'Een goede match begint bij het werk',
+  wat:'Onze kandidaten zijn Hagenaars met een afstand tot de arbeidsmarkt. Een match slaagt als het werk ook bij hen past. Daarom kijken we eerst samen naar het werk en de randvoorwaarden, en pas daarna naar de kandidaat.',
+  wanneer:'U heeft terugkerend werk en staat open voor aanpassingen, zoals taken anders verdelen, een opbouw in uren, extra inwerktijd of een proefplaatsing.',
+  levert:'Gemotiveerde medewerkers die met de juiste begeleiding en aanpassingen duurzaam blijven.',
+  hoe:'Een vast aanspreekpunt, een gesprek over het werk en wat er aan uw kant nodig is, voorselectie van kandidaten, kennismaking en waar passend een proefplaatsing.'},
+ {ic:'✂',naam:'Functiecreatie en jobcarving',ond:'Werk anders organiseren zodat het past',
+  wat:'Bij jobcarving halen we taken uit bestaande functies en bundelen die tot een nieuwe rol. Bij functiecreatie ontwerpen we vanuit uw werkprocessen een nieuwe functie.',
+  wanneer:'Uw vakmensen besteden veel tijd aan eenvoudige taken, of er blijven taken liggen die niemand oppakt.',
+  levert:'Lagere werkdruk, vakmensen die zich op hun kernwerk richten en een nieuwe, duurzame functie.',
+  hoe:'Een analyse van taken en werkprocessen samen met u en uw leidinggevenden, en een voorstel voor een passende functie.'},
+ {ic:'🧭',naam:'Begeleiding op de werkvloer',ond:'Een goede start en een blijvende plek',
+  wat:'Ondersteuning bij inwerken, begeleiden en behouden van uw nieuwe medewerker, bijvoorbeeld met jobcoaching of werkbegeleiding.',
+  wanneer:'U heeft weinig ervaring met de doelgroep, of uw medewerker heeft extra ondersteuning nodig om goed te landen.',
+  levert:'Minder uitval, sneller productieve medewerkers en leidinggevenden die weten waar ze terechtkunnen.',
+  hoe:'Een jobcoach die op de werkvloer aanwezig is waar dat passend en beschikbaar is, leermeestertraining voor collega\u0027s en vaste contactmomenten na de start.'},
+ {ic:'€',naam:'Financiële regelingen en instrumenten',ond:'Risico\u0027s en kosten beperken',
+  wat:'Informatie en hulp bij regelingen zoals loonkostensubsidie, proefplaatsing, de no-riskpolis en het loonkostenvoordeel.',
+  wanneer:'U twijfelt over de financiële risico\u0027s of verwacht dat een medewerker in het begin minder productief is.',
+  levert:'Duidelijkheid vooraf, minder financieel risico en minder administratieve rompslomp.',
+  hoe:'We bekijken welke regelingen in uw situatie van toepassing zijn en helpen bij de aanvraag. Voorwaarden en beschikbaarheid verschillen per regeling.'},
+ {ic:'🎓',naam:'Opleiden en ontwikkelen',ond:'Leren in de praktijk',
+  wat:'Praktijkleren, leerlijnen, werknemersvaardigheden en vakvaardigheden op de werkplek, soms met een erkend certificaat.',
+  wanneer:'U wilt medewerkers zelf opleiden tot vakkracht, of u wilt investeren in duurzame inzetbaarheid.',
+  levert:'Medewerkers die precies leren wat uw organisatie nodig heeft, en een sterkere binding met uw bedrijf.',
+  hoe:'We verbinden u met passende leerroutes en denken mee over begeleiding en financiering.'},
+ {ic:'💡',naam:'Advies over inclusief werkgeverschap',ond:'Inclusief werken structureel verankeren',
+  wat:'Inzicht met de VIO, advies over organisatie en draagvlak, en het opstellen van een gezamenlijk samenwerkingsplan.',
+  wanneer:'U wilt inclusief werken onderdeel maken van uw personeelsbeleid, of u wilt weten waar uw organisatie staat.',
+  levert:'Een helder beeld van mogelijkheden, draagvlak in uw organisatie en een concreet plan voor de komende periode.',
+  hoe:'Een vaste accountmanager die met u meedenkt als adviseur, niet alleen als bemiddelaar.'}
+];
+var dtEl = document.getElementById('dienst-tabs');
+diensten.forEach(function(d,i){
+  var b = document.createElement('button');
+  b.className = 'dtab';
+  b.innerHTML = '<span class="ic">'+d.ic+'</span><span>'+d.naam+'</span>';
+  b.onclick = function(){ toonDienst(i); };
+  dtEl.appendChild(b);
+});
+function toonDienst(i){
+  var d = diensten[i];
+  dtEl.querySelectorAll('.dtab').forEach(function(b,j){ b.classList.toggle('on', j===i); });
+  document.getElementById('dienst-detail').innerHTML = '<h4>'+d.naam+'</h4><p class="ond">'+d.ond+'</p><div class="dgrid">'+
+   '<div class="dblok"><div class="lab">Wat houdt het in?</div><p>'+d.wat+'</p></div>'+
+   '<div class="dblok"><div class="lab">Wanneer is het interessant?</div><p>'+d.wanneer+'</p></div>'+
+   '<div class="dblok k"><div class="lab">Wat levert het op?</div><p>'+d.levert+'</p></div>'+
+   '<div class="dblok"><div class="lab">Hoe ondersteunen wij?</div><p>'+d.hoe+'</p></div></div>';
+}
+toonDienst(0);
+
+// ===== STAPPEN =====
+var stappen = [
+ ['Kennismaken en verkennen','We bespreken uw organisatie, het werk dat u heeft, de mogelijkheden en eventuele uitdagingen. Wat speelt er, en waar wilt u naartoe?'],
+ ['Kansen ontdekken','We onderzoeken welke functies, werkzaamheden of ontwikkelmogelijkheden geschikt zijn. Waar dat past, gebruiken we de VIO als vertrekpunt voor het gesprek.'],
+ ['Een gezamenlijk samenwerkingsplan','Bij een intensieve samenwerking maken we concrete afspraken over werkplekken, instroom, begeleiding, ondersteuning, ontwikkeling en doelen. Het plan is geen document voor de la, maar een praktisch instrument om ambities om te zetten in resultaat.'],
+ ['Samen uitvoeren en begeleiden','We verbinden werkzoekenden met passende plekken en ondersteunen u en uw medewerker waar nodig, vooral in de eerste weken.'],
+ ['Evalueren en verder ontwikkelen','We bespreken ervaringen, resultaten en nieuwe mogelijkheden. Zo groeit de samenwerking en ontstaan structureel meer kansen.']
+];
+var stEl = document.getElementById('stappen');
+stappen.forEach(function(s,i){
+  var b = document.createElement('button');
+  b.className = 'stap';
+  b.innerHTML = '<div class="bol">'+(i+1)+'</div><div class="t">'+s[0]+'</div>';
+  b.onclick = function(){ toonStap(i); };
+  stEl.appendChild(b);
+});
+function toonStap(i){
+  stEl.querySelectorAll('.stap').forEach(function(b,j){ b.classList.toggle('on', j===i); });
+  document.getElementById('stap-detail').innerHTML = '<div class="label m">Stap '+(i+1)+' van 5</div><h4>'+stappen[i][0]+'</h4><p>'+stappen[i][1]+'</p>';
+}
+toonStap(0);
+
+ga(0);
+</script>
+</body>
+</html>
