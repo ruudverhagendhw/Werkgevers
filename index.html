@@ -207,7 +207,11 @@ h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
 @media(max-width:860px){.drempels{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.drempels{grid-template-columns:1fr}}
 .drempel{background:#fff;border:1px solid var(--lijn);border-radius:12px;padding:16px}
-.drempel .ic{font-size:22px;margin-bottom:6px}
+.drempels{counter-reset:dr}
+.drempel{counter-increment:dr;border-top:4px solid var(--magenta)}
+.drempel:nth-child(even){border-top-color:var(--paars)}
+.drempel::before{content:counter(dr,decimal-leading-zero);display:block;font-size:22px;font-weight:800;color:var(--magenta);line-height:1;margin-bottom:8px}
+.drempel:nth-child(even)::before{color:var(--paars)}
 .drempel h4{font-size:15px;color:var(--donker);margin-bottom:4px}
 .drempel p{font-size:13.5px}
 .drempel .oplossing{font-size:13px;color:var(--paars);font-weight:600;margin-top:8px;padding-top:8px;border-top:1px dashed var(--lijn)}
@@ -332,12 +336,12 @@ h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
   <h3 class="sub">Wat kan er meespelen?</h3>
   <p style="margin-bottom:14px;max-width:760px">Afstand tot de arbeidsmarkt is geen kenmerk van een persoon, maar een optelsom van drempels. Vaak is het een combinatie. Het goede nieuws: voor de meeste drempels is een praktische oplossing.</p>
   <div class="drempels">
-    <div class="drempel"><div class="ic">⏱</div><h4>Lang niet gewerkt</h4><p>Wie een tijd thuis is geweest, moet weer wennen aan werkritme, vaste tijden en collega's.</p><div class="oplossing">Opbouwen in uren en een vast aanspreekpunt op de werkvloer.</div></div>
-    <div class="drempel"><div class="ic">💬</div><h4>Taal</h4><p>Het Nederlands is soms nog in ontwikkeling. Gesprekken lukken, lange schriftelijke instructies zijn lastiger.</p><div class="oplossing">Voordoen in plaats van uitleggen, instructies met beeld en taalcoaching op de werkvloer.</div></div>
-    <div class="drempel"><div class="ic">🎓</div><h4>Geen passend diploma</h4><p>Kandidaten kunnen het werk vaak prima leren, maar missen het papiertje dat gevraagd wordt.</p><div class="oplossing">Kijken naar vaardigheden en praktijkleren met een erkend certificaat.</div></div>
-    <div class="drempel"><div class="ic">💪</div><h4>Belastbaarheid</h4><p>Sommige mensen kunnen (nog) niet fulltime of niet zwaar fysiek werken.</p><div class="oplossing">Taken anders verdelen, een aangepaste werkplek of minder uren.</div></div>
-    <div class="drempel"><div class="ic">🏠</div><h4>Persoonlijke omstandigheden</h4><p>Kinderopvang, mantelzorg of een onrustige thuissituatie kunnen het lastig maken om er altijd te staan.</p><div class="oplossing">Dit pakken we vóór de start samen met de kandidaat op, zodat u daar zo min mogelijk van merkt.</div></div>
-    <div class="drempel"><div class="ic">🌱</div><h4>Zelfvertrouwen</h4><p>Na een lange periode zonder werk is de spanning bij de start vaak groot.</p><div class="oplossing">Een meeloopdag, een rustige start en complimenten doen hier veel.</div></div>
+    <div class="drempel"><h4>Lang niet gewerkt</h4><p>Wie een tijd thuis is geweest, moet weer wennen aan werkritme, vaste tijden en collega's.</p><div class="oplossing">Opbouwen in uren en een vast aanspreekpunt op de werkvloer.</div></div>
+    <div class="drempel"><h4>Taal</h4><p>Het Nederlands is soms nog in ontwikkeling. Gesprekken lukken, lange schriftelijke instructies zijn lastiger.</p><div class="oplossing">Voordoen in plaats van uitleggen, instructies met beeld en taalcoaching op de werkvloer.</div></div>
+    <div class="drempel"><h4>Geen passend diploma</h4><p>Kandidaten kunnen het werk vaak prima leren, maar missen het papiertje dat gevraagd wordt.</p><div class="oplossing">Kijken naar vaardigheden en praktijkleren met een erkend certificaat.</div></div>
+    <div class="drempel"><h4>Belastbaarheid</h4><p>Sommige mensen kunnen (nog) niet fulltime of niet zwaar fysiek werken.</p><div class="oplossing">Taken anders verdelen, een aangepaste werkplek of minder uren.</div></div>
+    <div class="drempel"><h4>Persoonlijke omstandigheden</h4><p>Kinderopvang, mantelzorg of een onrustige thuissituatie kunnen het lastig maken om er altijd te staan.</p><div class="oplossing">Dit pakken we vóór de start samen met de kandidaat op, zodat u daar zo min mogelijk van merkt.</div></div>
+    <div class="drempel"><h4>Zelfvertrouwen</h4><p>Na een lange periode zonder werk is de spanning bij de start vaak groot.</p><div class="oplossing">Een meeloopdag, een rustige start en complimenten doen hier veel.</div></div>
   </div>
 
   <h3 class="sub">Ieder heeft een eigen tempo</h3>
