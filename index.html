@@ -201,6 +201,48 @@ h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
 .blok-nr{width:40px;height:40px;border-radius:50%;background:var(--magenta);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px}
 .blok-nr.p{background:var(--paars)}.blok-nr.l{background:var(--lichtpaars)}
 
+
+/* KANDIDATEN */
+.drempels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:860px){.drempels{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.drempels{grid-template-columns:1fr}}
+.drempel{background:#fff;border:1px solid var(--lijn);border-radius:12px;padding:16px}
+.drempel .ic{font-size:22px;margin-bottom:6px}
+.drempel h4{font-size:15px;color:var(--donker);margin-bottom:4px}
+.drempel p{font-size:13.5px}
+.drempel .oplossing{font-size:13px;color:var(--paars);font-weight:600;margin-top:8px;padding-top:8px;border-top:1px dashed var(--lijn)}
+.tempo{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--lijn)}
+@media(max-width:760px){.tempo{grid-template-columns:1fr}}
+.tempo>div{padding:20px;background:#fff}
+.tempo>div:nth-child(2){background:var(--lila)}
+.tempo>div:nth-child(3){background:var(--roze)}
+.tempo h4{font-size:16px;color:var(--donker);margin-bottom:6px}
+.tempo .stip{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.tempo p{font-size:14px}
+.persoon{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--lijn);border-radius:16px;padding:22px;border-left:6px solid var(--paars)}
+@media(max-width:600px){.persoon{flex-direction:column}}
+.persoon .av{width:64px;height:64px;border-radius:50%;background:var(--lila);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
+.persoon h4{font-size:17px;color:var(--donker);margin-bottom:6px}
+.persoon p{font-size:14px;margin-bottom:6px}
+.tijdlijn{position:relative;margin-top:8px}
+.tijdlijn::before{content:'';position:absolute;left:23px;top:10px;bottom:10px;width:2px;background:var(--lichtpaars)}
+.tl{position:relative;padding-left:64px;margin-bottom:14px}
+.tl .bol{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--lichtpaars);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--paars);font-size:16px;z-index:1}
+.tl.on .bol{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.tl-kop{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--lijn);border-radius:12px;padding:12px 16px;cursor:pointer;transition:all .2s}
+.tl-kop:hover{border-color:var(--lichtpaars)}
+.tl.on .tl-kop{border-color:var(--magenta);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.tl-kop small{display:block;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--magenta)}
+.tl-kop b{font-size:15.5px;color:var(--donker)}
+.tl-kop .pm{float:right;color:var(--magenta);font-weight:800;font-size:18px}
+.tl-lijf{display:none;background:#fff;border:1px solid var(--magenta);border-top:none;border-radius:0 0 12px 12px;padding:16px}
+.tl.on .tl-lijf{display:block}
+.tl-lijf .verhaal{font-size:14px;margin-bottom:12px}
+.tl-lijf .dgrid{gap:10px}
+.hobbel{margin-top:10px;background:#FFF4EA;border-left:3px solid #E9A15C;border-radius:8px;padding:10px 14px;font-size:13.5px;color:#7A3F0B}
+.hobbel b{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.afspraak{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.afspraak{grid-template-columns:1fr}}
 /* SCENARIO */
 .scen{background:#fff;border:1px solid var(--lijn);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .scen .kop{background:var(--lila);padding:18px 20px}
@@ -251,12 +293,12 @@ h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
 
   <h3 class="sub">Waar wilt u beginnen?</h3>
   <ul class="vraag-lijst">
-    <li data-ga="5"><span>1</span>Wat kan Den Haag Werkt voor mijn organisatie betekenen?</li>
+    <li data-ga="6"><span>1</span>Wat kan Den Haag Werkt voor mijn organisatie betekenen?</li>
     <li data-ga="2"><span>2</span>Welke mensen en talenten kunnen bij mijn organisatie komen werken?</li>
-    <li data-ga="3"><span>3</span>Wat vraagt inclusief werkgeverschap van mij en wat levert het op?</li>
-    <li data-ga="4"><span>4</span>Welke ondersteuning krijg ik bij werving, begeleiding en ontwikkeling?</li>
-    <li data-ga="5"><span>5</span>Hoe gaan we een duurzame samenwerking aan?</li>
-    <li data-ga="7"><span>6</span>Hoe vul ik mijn SROI-verplichting in met blijvende waarde?</li>
+    <li data-ga="4"><span>3</span>Wat vraagt inclusief werkgeverschap van mij en wat levert het op?</li>
+    <li data-ga="5"><span>4</span>Welke ondersteuning krijg ik bij werving, begeleiding en ontwikkeling?</li>
+    <li data-ga="6"><span>5</span>Hoe gaan we een duurzame samenwerking aan?</li>
+    <li data-ga="8"><span>6</span>Hoe vul ik mijn SROI-verplichting in met blijvende waarde?</li>
   </ul>
 </section>
 
@@ -272,6 +314,68 @@ h3.sub{font-size:19px;font-weight:700;color:var(--donker);margin:36px 0 14px}
     <div class="kaart top p"><div class="icoon">↗</div><h4>Ontwikkelmogelijkheden</h4><p>Bij u kunnen medewerkers leren, groeien en duurzaam blijven werken. Zo wordt een eerste baan het begin van een loopbaan.</p></div>
     <div class="kaart top"><div class="icoon m">🤝</div><h4>Duurzaam partnerschap</h4><p>U wilt investeren in een structurele relatie, met gezamenlijke afspraken en een gedeelde verantwoordelijkheid voor het resultaat.</p></div>
     <div class="kaart lila"><h4>Kleiner of gespecialiseerd?</h4><p>Bedrijfsgrootte is voor ons geen harde grens. Ook kleinere werkgevers en gespecialiseerde sociaal ondernemers bieden waardevolle kansen. Neem gerust contact op, dan kijken we samen wat past.</p></div>
+  </div>
+</section>
+
+<!-- 2 KANDIDATEN -->
+<section class="pnl" data-titel="Onze kandidaten">
+  <div class="kicker">Wie komt er bij u werken?</div>
+  <h2 class="titel">Talent met een steun in de rug</h2>
+  <p class="intro">Onze kandidaten zijn Hagenaars die graag willen werken, maar voor wie de stap naar een baan niet vanzelf gaat. Dat noemen we een afstand tot de arbeidsmarkt. Wat die afstand is, verschilt per persoon. Hieronder leest u wie onze kandidaten zijn, wat er kan meespelen en hoe een samenwerking in de praktijk verloopt.</p>
+
+  <h3 class="sub" style="margin-top:0">Wie zijn onze kandidaten?</h3>
+  <div class="g2">
+    <div class="kaart"><p>Het zijn inwoners van Den Haag met een uitkering vanuit de Participatiewet. Een heel diverse groep: jongeren die nog op zoek zijn naar hun plek, nieuwe Hagenaars die Nederlands aan het leren zijn, ouders die jaren voor hun gezin hebben gezorgd, vijftigplussers met veel levenservaring en mensen die door gezondheid of omstandigheden een tijd niet hebben gewerkt.</p></div>
+    <div class="kaart lila"><h4>Wat ze meebrengen</h4><p>Motivatie om er iets van te maken, levens- en werkervaring, soms uit een ander land, en vaak een grote loyaliteit aan de werkgever die hen een kans geeft. Veel kandidaten spreken meerdere talen en zijn flexibel inzetbaar.</p></div>
+  </div>
+
+  <h3 class="sub">Wat kan er meespelen?</h3>
+  <p style="margin-bottom:14px;max-width:760px">Afstand tot de arbeidsmarkt is geen kenmerk van een persoon, maar een optelsom van drempels. Vaak is het een combinatie. Het goede nieuws: voor de meeste drempels is een praktische oplossing.</p>
+  <div class="drempels">
+    <div class="drempel"><div class="ic">⏱</div><h4>Lang niet gewerkt</h4><p>Wie een tijd thuis is geweest, moet weer wennen aan werkritme, vaste tijden en collega's.</p><div class="oplossing">Opbouwen in uren en een vast aanspreekpunt op de werkvloer.</div></div>
+    <div class="drempel"><div class="ic">💬</div><h4>Taal</h4><p>Het Nederlands is soms nog in ontwikkeling. Gesprekken lukken, lange schriftelijke instructies zijn lastiger.</p><div class="oplossing">Voordoen in plaats van uitleggen, instructies met beeld en taalcoaching op de werkvloer.</div></div>
+    <div class="drempel"><div class="ic">🎓</div><h4>Geen passend diploma</h4><p>Kandidaten kunnen het werk vaak prima leren, maar missen het papiertje dat gevraagd wordt.</p><div class="oplossing">Kijken naar vaardigheden en praktijkleren met een erkend certificaat.</div></div>
+    <div class="drempel"><div class="ic">💪</div><h4>Belastbaarheid</h4><p>Sommige mensen kunnen (nog) niet fulltime of niet zwaar fysiek werken.</p><div class="oplossing">Taken anders verdelen, een aangepaste werkplek of minder uren.</div></div>
+    <div class="drempel"><div class="ic">🏠</div><h4>Persoonlijke omstandigheden</h4><p>Kinderopvang, mantelzorg of een onrustige thuissituatie kunnen het lastig maken om er altijd te staan.</p><div class="oplossing">Dit pakken we vóór de start samen met de kandidaat op, zodat u daar zo min mogelijk van merkt.</div></div>
+    <div class="drempel"><div class="ic">🌱</div><h4>Zelfvertrouwen</h4><p>Na een lange periode zonder werk is de spanning bij de start vaak groot.</p><div class="oplossing">Een meeloopdag, een rustige start en complimenten doen hier veel.</div></div>
+  </div>
+
+  <h3 class="sub">Ieder heeft een eigen tempo</h3>
+  <div class="tempo">
+    <div><h4><span class="stip" style="background:#7DB352"></span>Snel aan de slag</h4><p>Kan na een korte inwerkperiode meedraaien. Heeft vooral een werkgever nodig die de kans geeft.</p></div>
+    <div><h4><span class="stip" style="background:var(--paars)"></span>Met begeleiding en aanpassing</h4><p>Kan het werk goed doen als taken, uren of begeleiding passend zijn ingericht. Hier zit de grootste groep.</p></div>
+    <div><h4><span class="stip" style="background:var(--magenta)"></span>Eerst ontwikkelen</h4><p>Bouwt eerst werkritme en vaardigheden op, bijvoorbeeld op een leerwerkplek of bij een sociaal ondernemer, en zet daarna de stap naar u.</p></div>
+  </div>
+  <div class="banner">We vertellen u vooraf eerlijk wat een kandidaat meebrengt en wat hij of zij nodig heeft. Geen verrassingen achteraf, maar een match waar beide kanten op kunnen bouwen.</div>
+
+  <h3 class="sub">Zo verloopt een samenwerking: een situatieschets</h3>
+  <div class="persoon">
+    <div class="av">🏨</div>
+    <div>
+      <h4>Een hotel in Den Haag en Samira</h4>
+      <p>Een hotel heeft al maanden moeite om de housekeeping op sterkte te houden. Samira (41) heeft acht jaar voor haar kinderen en haar moeder gezorgd. Ze spreekt redelijk Nederlands, heeft in haar geboorteland in een hotel gewerkt en wil graag weer aan de slag. Ze is wel onzeker of ze het tempo aankan.</p>
+      <p style="font-size:12.5px;color:var(--grijs);font-style:italic;margin:0">Illustratief voorbeeld, gebaseerd op hoe wij werken. Klik op een stap voor wat er gebeurt.</p>
+    </div>
+  </div>
+  <div class="tijdlijn" id="tijdlijn"></div>
+
+  <h3 class="sub">Wat u van ons mag verwachten, en wat wij van u vragen</h3>
+  <div class="afspraak">
+    <div class="kaart top"><h4>Wat u van ons mag verwachten</h4><ul class="wat-levert" style="margin-top:6px">
+      <li>Eén vast aanspreekpunt dat uw organisatie kent</li>
+      <li>Een eerlijk beeld van de kandidaat, vooraf</li>
+      <li>Kandidaten die voorbereid aan de start verschijnen</li>
+      <li>Hulp bij regelingen en de administratie daarvan</li>
+      <li>Begeleiding op de werkvloer waar dat passend en beschikbaar is</li>
+      <li>Bereikbaarheid als het even niet loopt, ook na de start</li>
+    </ul></div>
+    <div class="kaart top p"><h4>Wat wij van u vragen</h4><ul class="wat-levert" style="margin-top:6px">
+      <li>Openheid om werk, uren of taken waar nodig aan te passen</li>
+      <li>Een vaste collega die de nieuwe medewerker wegwijs maakt</li>
+      <li>Tijd voor een rustige start en inwerken</li>
+      <li>Tijdig contact als er iets speelt, zodat we samen kunnen bijsturen</li>
+      <li>Bereidheid om na een goede proefperiode een arbeidsovereenkomst aan te bieden</li>
+    </ul></div>
   </div>
 </section>
 
@@ -727,6 +831,57 @@ function toonStap(i){
   document.getElementById('stap-detail').innerHTML = '<div class="label m">Stap '+(i+1)+' van 5</div><h4>'+stappen[i][0]+'</h4><p>'+stappen[i][1]+'</p>';
 }
 toonStap(0);
+
+// ===== SITUATIESCHETS =====
+var tijdlijn = [
+ {w:'Week 1',t:'Kennismaking op de werkvloer',
+  v:'De hotelmanager neemt contact op. Onze accountmanager komt langs en loopt een ochtend mee op de housekeeping. Hoe ziet een dienst eruit, hoeveel kamers per uur, wie kan een nieuwe collega inwerken?',
+  wg:'Laat het werk zien en is eerlijk over tempo en drukte.',
+  dhw:'Brengt in kaart welke taken geschikt zijn. Samen besluiten we te starten met 20 uur in de ochtenddienst, met een opbouw naar meer.'},
+ {w:'Week 2',t:'De juiste kandidaat zoeken',
+  v:'We zoeken in ons bestand naar kandidaten die bij dit werk en deze ploeg passen. Samira komt naar voren. We bespreken met haar wat het werk inhoudt en wat ze nodig heeft.',
+  wg:'Krijgt een kort profiel: wat Samira meebrengt, waar ze nog in groeit en wat zij nodig heeft.',
+  dhw:'Regelt samen met Samira wat nodig is om te kunnen starten, zoals naschoolse opvang en de reistijd.',
+  h:'Samira twijfelt of ze het tempo aankan. Daarom spreken we eerst een meeloopdag af, zonder verplichtingen.'},
+ {w:'Week 3',t:'Meeloopdag en kennismaking',
+  v:'Samira loopt een ochtend mee met een ervaren collega. Daarna volgt een gesprek met de leidinggevende, met onze accountmanager erbij.',
+  wg:'Ziet Samira aan het werk en kan gericht vragen stellen.',
+  dhw:'Bespreekt na afloop met beide kanten hoe het ging en of er een vervolg komt.'},
+ {w:'Week 4 tot 11',t:'Proefplaatsing',
+  v:'Samira start met een proefplaatsing. Ze behoudt in die periode haar uitkering en het hotel betaalt geen loon. Zo kunnen beide kanten zonder risico ervaren of het klikt. Een jobcoach komt de eerste weken regelmatig langs.',
+  wg:'Wijst een vaste collega aan als buddy en houdt korte lijnen met de jobcoach.',
+  dhw:'Zorgt voor begeleiding op de werkvloer, regelt de administratie en houdt vaste evaluatiemomenten.',
+  h:'In week 5 blijkt het kamertempo nog te hoog. Samen passen we de verdeling aan: Samira begint met de vaste routines en neemt geleidelijk meer kamers over. De werkinstructies worden fotokaarten. In week 9 haalt ze het normale tempo.'},
+ {w:'Week 12',t:'Een arbeidsovereenkomst',
+  v:'De proefplaatsing is goed verlopen. Het hotel biedt Samira een contract aan voor 24 uur. Samira is trots en het team is blij met een betrouwbare collega.',
+  wg:'Biedt een arbeidsovereenkomst aan, in dit geval voor zes maanden met uitzicht op verlenging.',
+  dhw:'Bekijkt of er regelingen van toepassing zijn en helpt bij de aanvraag. Welke regelingen mogelijk zijn, hangt af van de situatie van de kandidaat.'},
+ {w:'Eerste maanden',t:'Nazorg en bijsturen',
+  v:'Ook na de start blijven we betrokken. Er zijn vaste contactmomenten met Samira en de leidinggevende. Zo zien we vroeg als er iets speelt.',
+  wg:'Meldt het snel als er iets verandert, bijvoorbeeld bij verzuim.',
+  dhw:'Is bereikbaar voor vragen en schakelt snel als bijsturing nodig is.',
+  h:'In maand 4 valt de naschoolse opvang weg. Samira dreigt uit te vallen. Binnen een week regelen we samen met haar een oplossing, en het hotel schuift tijdelijk met haar rooster.'},
+ {w:'Na een jaar',t:'Groeien en doorbouwen',
+  v:'Samira werkt inmiddels 28 uur en krijgt een vast contract. Ze volgt een interne training en werkt zelf nieuwe collega\'s in. Het hotel vraagt of er een tweede kandidaat is.',
+  wg:'Ziet een stabiele bezetting en investeert in doorgroei.',
+  dhw:'Evalueert de samenwerking en verkent samen met het hotel de volgende stap.'}
+];
+var tlEl = document.getElementById('tijdlijn');
+tijdlijn.forEach(function(s,i){
+  var d = document.createElement('div');
+  d.className = 'tl' + (i===0 ? ' on' : '');
+  d.innerHTML = '<div class="bol">'+(i+1)+'</div>'+
+    '<button class="tl-kop"><span class="pm">'+(i===0?'−':'+')+'</span><small>'+s.w+'</small><b>'+s.t+'</b></button>'+
+    '<div class="tl-lijf"><p class="verhaal">'+s.v+'</p><div class="dgrid">'+
+    '<div class="dblok"><div class="lab">De werkgever</div><p>'+s.wg+'</p></div>'+
+    '<div class="dblok k"><div class="lab">Den Haag Werkt</div><p>'+s.dhw+'</p></div></div>'+
+    (s.h ? '<div class="hobbel"><b>Wat er kan meespelen</b>'+s.h+'</div>' : '')+'</div>';
+  d.querySelector('.tl-kop').onclick = function(){
+    var open = d.classList.toggle('on');
+    d.querySelector('.pm').textContent = open ? '−' : '+';
+  };
+  tlEl.appendChild(d);
+});
 
 ga(0);
 </script>
